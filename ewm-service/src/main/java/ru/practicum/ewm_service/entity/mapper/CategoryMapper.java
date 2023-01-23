@@ -1,9 +1,12 @@
 package ru.practicum.ewm_service.entity.mapper;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import ru.practicum.ewm_service.entity.Category;
 import ru.practicum.ewm_service.entity.dto.category.CategoryDto;
 import ru.practicum.ewm_service.entity.dto.category.NewCategoryDto;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CategoryMapper {
 
     public static Category fromDto(NewCategoryDto dto) {

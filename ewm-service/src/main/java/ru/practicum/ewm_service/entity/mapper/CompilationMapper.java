@@ -1,11 +1,14 @@
 package ru.practicum.ewm_service.entity.mapper;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import ru.practicum.ewm_service.entity.Compilation;
 import ru.practicum.ewm_service.entity.dto.compilation.CompilationDto;
 import ru.practicum.ewm_service.entity.dto.compilation.NewCompilationDto;
 
 import java.util.stream.Collectors;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CompilationMapper {
 
     public static Compilation fromDto(NewCompilationDto dto) {

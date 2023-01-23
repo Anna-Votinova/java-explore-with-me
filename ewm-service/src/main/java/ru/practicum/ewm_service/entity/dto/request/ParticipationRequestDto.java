@@ -6,6 +6,8 @@ import ru.practicum.ewm_service.entity.util.Status;
 
 import java.time.LocalDateTime;
 
+import static ru.practicum.ewm_service.entity.util.Constants.DATE_TIME;
+
 @Builder
 @Getter
 @Setter
@@ -14,7 +16,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class ParticipationRequestDto {
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = DATE_TIME)
     private LocalDateTime created;
     private Long event;
     private Long id;

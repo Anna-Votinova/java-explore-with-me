@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import java.sql.Timestamp;
 import java.util.List;
 
+import static ru.practicum.stats_server.Constants.DATE_TIME;
+
 @Builder
 @Getter
 @Setter
@@ -19,6 +21,6 @@ public class ApiError {
     private String message;
     private String reason;
     private HttpStatus status;
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @DateTimeFormat(pattern = DATE_TIME)
     private Timestamp timestamp;
 }

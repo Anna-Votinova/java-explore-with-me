@@ -1,5 +1,7 @@
 package ru.practicum.ewm_service.entity.mapper;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import ru.practicum.ewm_service.entity.Category;
 import ru.practicum.ewm_service.entity.Event;
 import ru.practicum.ewm_service.entity.dto.category.CategoryDto;
@@ -13,6 +15,8 @@ import ru.practicum.ewm_service.entity.util.State;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class EventMapper {
 
     public static Event fromDto(NewEventDto dto) {

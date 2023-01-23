@@ -6,6 +6,8 @@ import lombok.*;
 import javax.validation.constraints.NotBlank;
 import java.sql.Timestamp;
 
+import static ru.practicum.stats_server.Constants.DATE_TIME;
+
 @Builder
 @Getter
 @Setter
@@ -24,6 +26,6 @@ public class EndpointHitDto {
     @NotBlank
     private String ip;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_TIME)
     private Timestamp timestamp;
 }

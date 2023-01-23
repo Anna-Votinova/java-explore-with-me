@@ -5,6 +5,8 @@ import lombok.*;
 
 import java.sql.Timestamp;
 
+import static ru.practicum.ewm_service.entity.util.Constants.DATE_TIME;
+
 @Builder
 @Getter
 @Setter
@@ -17,6 +19,6 @@ public class EndpointHitDto {
     private String app;
     private String uri;
     private String ip;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_TIME)
     private Timestamp timestamp;
 }

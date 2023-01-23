@@ -29,7 +29,7 @@ public class CompilationServiceImpl implements CompilationService {
     @Override
     public CompilationDto createCompilation(NewCompilationDto dto) {
         Compilation compilation = CompilationMapper.fromDto(dto);
-        compilation.setEvents(eventRepository.findAllById(dto.getEvents()));//что возвращает, либо через стрим этот метод, либо через файнд ин
+        compilation.setEvents(eventRepository.findAllById(dto.getEvents()));
         return CompilationMapper.toDto(compilationRepository.save(compilation));
     }
 
@@ -37,8 +37,8 @@ public class CompilationServiceImpl implements CompilationService {
     public void addEventToCompilation(Long compId, Long eventId) {
         Compilation compilation = getCompilation(compId);
         Event event = getEvent(eventId);
-        compilation.getEvents().add(event);//будет ли добавлять
-        compilationRepository.save(compilation);//возможно, надо испльзовать прямую вставку в таблицу в репозитории
+        compilation.getEvents().add(event);
+        compilationRepository.save(compilation);
 
 
     }

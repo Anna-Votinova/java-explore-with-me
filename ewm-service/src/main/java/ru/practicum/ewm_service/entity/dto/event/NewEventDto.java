@@ -10,6 +10,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 
+import static ru.practicum.ewm_service.entity.util.Constants.DATE_TIME;
+
 @Builder
 @Getter
 @Setter
@@ -26,7 +28,7 @@ public class NewEventDto {
     @Size(max = 7000, min = 20)
     @NotBlank
     private String description;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_TIME)
     @ValidateDateEvent(message = "Дата и время события не могут быть раньше, чем через 2 часа от текущего момента")
     private Timestamp eventDate;
     @NotNull

@@ -41,7 +41,7 @@ public class RequestServiceImpl implements RequestService {
         if (requestsRepository.existsByEventIdAndRequesterId(eventId, userId)
                 || event.getInitiator().getId().equals(userId)
                 || !event.getState().equals(State.PUBLISHED)
-                || event.getParticipantLimit() != 0 && event.getConfirmedRequests() == event.getParticipantLimit()) { //возможно, другой метод
+                || event.getParticipantLimit() != 0 && event.getConfirmedRequests() == event.getParticipantLimit()) {
             throw new ValidationException("Запрос не может быть добавлен");
         }
 

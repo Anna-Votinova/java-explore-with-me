@@ -6,6 +6,8 @@ import ru.practicum.ewm_service.entity.Category;
 
 import java.sql.Timestamp;
 
+import static ru.practicum.ewm_service.entity.util.Constants.DATE_TIME;
+
 public interface EventShort {
 
     String getAnnotation();
@@ -15,7 +17,7 @@ public interface EventShort {
 
     Long getConfirmedRequests();
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_TIME)
     Timestamp getEventDate();
 
     Long getId();

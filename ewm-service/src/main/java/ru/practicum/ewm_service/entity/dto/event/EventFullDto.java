@@ -9,6 +9,8 @@ import ru.practicum.ewm_service.entity.util.State;
 
 import java.sql.Timestamp;
 
+import static ru.practicum.ewm_service.entity.util.Constants.DATE_TIME;
+
 
 @Builder
 @Getter
@@ -24,12 +26,12 @@ public class EventFullDto {
 
     private Long confirmedRequests;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_TIME)
     private Timestamp createdOn;
 
     private String description;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_TIME)
     private Timestamp eventDate;
 
     private Long id;
@@ -42,7 +44,7 @@ public class EventFullDto {
 
     private int participantLimit;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_TIME)
     private Timestamp publishedOn;
 
     private boolean requestModeration;

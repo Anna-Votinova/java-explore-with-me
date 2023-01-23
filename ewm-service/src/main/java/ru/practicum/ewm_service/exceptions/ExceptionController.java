@@ -85,6 +85,7 @@ public class ExceptionController {
     @ExceptionHandler(DataIntegrityViolationException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
     public ApiError handleThrowableDataIntegrityViolation(final DataIntegrityViolationException e) {
+        log.error(e.getMessage(), e);
         return ApiError.builder()
                 .errors(List.of(e.getClass().getName()))
                 .message(e.getLocalizedMessage())
