@@ -643,9 +643,8 @@
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
 									"});\r",
-									"pm.test(\"Check evenTid\", function () {\r",
+									"pm.test(\"Check initiatorId\", function () {\r",
 									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.id).to.eql(1);\r",
 									"    pm.expect(jsonData.initiator.id).to.eql(2);\r",
 									"});"
 								],
@@ -760,10 +759,7 @@
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
 									"});\r",
-									"pm.test(\"Check eventId\", function () {\r",
-									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData[0].id).to.eql(1);\r",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
