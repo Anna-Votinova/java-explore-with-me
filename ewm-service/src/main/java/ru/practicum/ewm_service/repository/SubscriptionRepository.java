@@ -19,4 +19,6 @@ public interface SubscriptionRepository extends JpaRepository<Subscription, Long
             Long userId, Long friendId, Long userId1, Long friendId1, Status status);
 
     List<Subscription> findSubscriptionByUserIdOrFriendIdAndStatus(Long userId, Long userId1, Status status);
+
+    boolean existsByUserIdAndFriendIdAndStatusIn(Long userId, Long friendId, List<Status> status);
 }

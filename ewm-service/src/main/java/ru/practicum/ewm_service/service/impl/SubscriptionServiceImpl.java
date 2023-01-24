@@ -19,6 +19,7 @@ import ru.practicum.ewm_service.repository.SubscriptionRepository;
 import ru.practicum.ewm_service.repository.UserRepository;
 import ru.practicum.ewm_service.service.SubscriptionService;
 
+import javax.validation.ValidationException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -41,6 +42,12 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     @Override
     public void addRequestForFriendship(Long userId, Long friendId) {
         User requester = checkAndReturnUser(userId);
+        List<Status> statuses = List.of(Status.PENDING, Status.REJECTED, Status.CONFIRMED);
+
+        if (subscriptionRepository.existsByUserIdAndFriendIdAndStatusIn(userId, friendId, statuses))  {
+            throw new ValidationException("Юзер уже подал заявку");
+        }
+
         User maybeFriend = checkAndReturnUser(friendId);
         Subscription subscription = new Subscription();
         subscription.setUser(requester);
@@ -55,7 +62,8 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         List<Status> statuses = List.of(Status.PENDING, Status.CONFIRMED);
         Subscription subscription = subscriptionRepository
                 .findSubscriptionByUserIdAndFriendIdAndStatusIn(userId, friendId, statuses).orElseThrow(
-                        () -> new IllegalArgumentException("Заявка на добавление в друзья не была направлена"));
+                        () -> new IllegalArgumentException("Заявка на добавление в друзья не была направлена, " +
+                                "отклонена или отменена самим пользователем"));
 
         subscription.setStatus(Status.CANCELED);
         subscriptionRepository.save(subscription);
@@ -66,7 +74,8 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         List<Status> statuses = List.of(Status.PENDING, Status.REJECTED);
         Subscription subscription = subscriptionRepository
                 .findByUserIdAndFriendIdAndStatusIn(friendId, userId, statuses).orElseThrow(
-                        () -> new IllegalArgumentException("Заявка на добавление в друзья не была направлена"));
+                        () -> new IllegalArgumentException("Заявка на добавление в друзья не была направлена," +
+                                " отменена отправителем или уже одобрена"));
         subscription.setStatus(Status.CONFIRMED);
         subscriptionRepository.save(subscription);
 
@@ -77,7 +86,8 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         List<Status> statuses = List.of(Status.PENDING, Status.CONFIRMED);
         Subscription subscription = subscriptionRepository
                 .findByUserIdAndFriendIdAndStatusIn(friendId, userId, statuses).orElseThrow(
-                        () -> new IllegalArgumentException("Заявка на добавление в друзья не была направлена"));
+                        () -> new IllegalArgumentException("Заявка на добавление в друзья не была направлена, " +
+                                "отклонена или отменена самим пользователем"));
         subscription.setStatus(Status.REJECTED);
         subscriptionRepository.save(subscription);
 
@@ -93,7 +103,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
                 .existsByUserIdAndFriendIdOrFriendIdAndUserIdAndStatus(
                         userId, friendId, userId, friendId, Status.CONFIRMED)) {
 
-            throw new IllegalArgumentException("Заявка на добавление в друзья не была направлена");
+            throw new IllegalArgumentException("Заявка на добавление в друзья не была направлена, либо была отменена");
 
         }
 
